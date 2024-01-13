@@ -12,6 +12,7 @@ const addTasks = expressAsyncHandler(async (req, res) => {
     return;
   }
   const task = await Tasks.create({
+    user_id: req.user.id,
     taskName,
     taskDescription,
     startTime,
@@ -22,7 +23,7 @@ const addTasks = expressAsyncHandler(async (req, res) => {
 
 //@Desc get all tasks
 //@routes GET /tasks/:id
-//access public
+//access private
 const getTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.id);
   if (!task) {
@@ -34,7 +35,7 @@ const getTasks = expressAsyncHandler(async (req, res) => {
 
 //@Desc get all tasks
 //@routes GET /tasks/:id
-//access public
+//access private
 const putTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.id);
   if (!task) {
@@ -49,7 +50,7 @@ const putTasks = expressAsyncHandler(async (req, res) => {
 
 //@Desc get all tasks
 //@routes DELETE /tasks/:id
-//access public
+//access private
 const deleteTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.id);
   if (!task) {

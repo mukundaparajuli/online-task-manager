@@ -1,7 +1,7 @@
 const expressAsyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const User = require("../Models/userModel");
-const jwt = require("json-web-token");
+const jwt = require("jsonwebtoken");
 
 // @Desc register the user
 // @route /users/register
@@ -38,12 +38,12 @@ const loginUser = expressAsyncHandler(async (req, res) => {
     const accessToken = jwt.sign(
       {
         user: {
-          username: user.username,
+          name: user.name,
           email: user.email,
           id: user.id,
         },
       },
-      process.env.ACCESS_TOKEN_SECERT,
+      process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "15m" }
     );
     res.status(200).json({ accessToken });
@@ -57,7 +57,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
 // @route /users/currentInfo
 // @access private
 const currentInfo = expressAsyncHandler(async (req, res) => {
-  res.status(200).send({ message: "current info of the user" });
+  res.json(req.user)
 });
 
 module.exports = { registerUser, loginUser, currentInfo };
