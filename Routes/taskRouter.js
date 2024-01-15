@@ -10,10 +10,12 @@ const {
 const validateTokenHandler = require("../middlewares/validateTokenHandler");
 router.use(validateTokenHandler)
 router
-  .route("/tasks/:id")
+  .route("/tasks/")
+  .post(addTasks);
+  router
+  .route("/tasks/:userid/:id")
   .get(getTasks)
   .put(putTasks)
   .delete(deleteTasks)
-  .post(addTasks);
 
 module.exports = router;

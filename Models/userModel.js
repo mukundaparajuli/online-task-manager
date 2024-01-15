@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      validate: {
+        validator: function (value) {
+          return /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm.test(value)
+        },
+        message: props => "Invalid Email Format!"
+      }
     },
     password: {
       type: String,

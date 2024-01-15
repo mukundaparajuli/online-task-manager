@@ -4,7 +4,7 @@ const User = require("../Models/userModel");
 const jwt = require("jsonwebtoken");
 
 // @Desc register the user
-// @route /users/register
+// @route /register
 // @access public
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -21,6 +21,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   const user = await User.create({ name, email, password: hashedPassword });
   console.log(user);
   console.log(hashedPassword);
+  res.json(user)
 });
 
 // @Desc login user

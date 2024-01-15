@@ -16,15 +16,27 @@ const taskSchmea = mongoose.Schema(
     },
     startTime: {
       type: Date,
-      required: [true, "Starting date con not be left blank!"],
+      required: [true, "Starting time con not be left blank!"],
+      validate: {
+        validator: function (value) {
+          return value >= Date.now();
+        },
+        message: "Starting time should be in future!",
+      },
     },
     endTime: {
       type: Date,
       required: [true, "Ending time for the task cannot be left blank!"],
+      validate: {
+        validator: function (value) {
+          return value >= this.startTime;
+        },
+        message: "Ending time should be after the starting time!",
+      },
     },
   },
   {
-    timeStamp: true,
+    timestamps: true,
   }
 );
 
