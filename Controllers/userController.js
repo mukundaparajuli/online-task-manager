@@ -2,6 +2,7 @@ const expressAsyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const User = require("../Models/userModel");
 const jwt = require("jsonwebtoken");
+const nodeMailer = require("../middlewares/nodeMailer");
 
 // @Desc register the user
 // @route /register
@@ -22,6 +23,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   console.log(user);
   console.log(hashedPassword);
   res.json(user)
+  // nodeMailer(req, res);
 });
 
 // @Desc login user

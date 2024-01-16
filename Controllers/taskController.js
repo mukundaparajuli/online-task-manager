@@ -49,7 +49,7 @@ const putTasks = expressAsyncHandler(async (req, res) => {
 });
 
 //@Desc get all tasks
-//@routes DELETE /tasks/:id
+//@routes DELETE /tasks/: userid/:id
 //access private
 const deleteTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.id);
