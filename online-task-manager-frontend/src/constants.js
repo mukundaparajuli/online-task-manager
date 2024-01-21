@@ -1,0 +1,3 @@
+export const signUpBg = "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+export const accountIcon = "https://p7.hiclipart.com/preview/343/677/100/computer-icons-user-profile-login-clip-art-my-account-icon.jpg";
+export const logo = "https://see.fontimg.com/api/renderfont4/K7lXZ/eyJyIjoiZnMiLCJoIjo3OCwidyI6MTE5OCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/T3JnYW5pemVGbG93/jago.png";
