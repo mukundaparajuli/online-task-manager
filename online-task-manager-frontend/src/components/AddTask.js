@@ -81,9 +81,9 @@ const AddTask = () => {
 
                     <div className='p-3'>
                         <button className='m-2 p-2 bg-green-600 rounded-lg shadow-green-500 text-lg font-bold text-white'>Add+</button>
+                        <button className='m-2 p-2 bg-red-600 rounded-lg shadow-red-500 text-lg font-bold text-white' onClick={() => setAddTask(0)}>Cancel</button>
                     </div>
                 </form>
-                <button className='m-2 p-2 bg-red-600 rounded-lg shadow-red-500 text-lg font-bold text-white' onClick={() => setAddTask(0)}>Cancel</button>
             </div>
         </div>
 

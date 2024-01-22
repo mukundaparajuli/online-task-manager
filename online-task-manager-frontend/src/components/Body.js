@@ -17,7 +17,7 @@ const Body = () => {
     const [addTask, setAddTask] = useState(false);
     const [updateTask, setUpdateTask] = useState(false);
     const [task, setTask] = useState(null)
-    const { user, serverToken } = useAuth()
+    const { user } = useAuth()
     const handleGetData = async (token) => {
         try {
             console.log(user)

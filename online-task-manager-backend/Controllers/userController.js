@@ -10,13 +10,13 @@ const nodeMailer = require("../middlewares/nodeMailer");
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
-    res.status(400);
+    res.status(400)
     throw new Error("All fields are mandatory to be filled!");
   }
   const userAvailable = await User.findOne({ email });
   if (userAvailable) {
-    res.status(400);
-    throw new Error("User already exists");
+    res.status(400)
+    throw new Error("User already exists!");
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await User.create({ name, email, password: hashedPassword });
@@ -32,8 +32,8 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 const loginUser = expressAsyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    res.status(400);
-    throw new Error("All fields are mandatory!");
+    res.status(400)
+    throw new Error("All fields are mandatory to be filled!");
   }
   const user = await User.findOne({ email });
   //compare password with hashedpassword
@@ -51,8 +51,8 @@ const loginUser = expressAsyncHandler(async (req, res) => {
     );
     res.status(200).json({ accessToken });
   } else {
-    res.status(401);
-    throw new Error("email or password is not valid");
+    res.status(400)
+    throw new Error("Invalid Input");
   }
 });
 

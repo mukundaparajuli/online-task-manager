@@ -13,21 +13,26 @@ const nodeMailer = async (req, res, next) => {
     });
     const { name, email } = req.body;
     const user = await User.find({ email: email })
-
-    const message = {
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: email, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+    if (user) {
+        res.send("User Already exists");
     }
-    try {
-        const info = await transporter.sendMail(message)
-        console.log(info);
-        res.status(200)
-        res.json(info)
-    } catch (error) {
-        console.log(error);
+    else {
+
+        const message = {
+            from: '"Fred Foo 👻" <foo@example.com>', // sender address
+            to: email, // list of receivers
+            subject: "Hello ✔", // Subject line
+            text: "Hello world?", // plain text body
+            html: "<b>Hello world?</b>", // html body
+        }
+        try {
+            const info = await transporter.sendMail(message)
+            console.log(info);
+            res.status(200)
+            res.json(info)
+        } catch (error) {
+            console.log(error);
+        }
     }
     next();
 }
