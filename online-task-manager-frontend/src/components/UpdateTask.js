@@ -31,18 +31,20 @@ const UpdateTask = () => {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify(updatedTask)
+                body: JSON.stringify(updatedTask)
             });
 
             console.log('Response:', response);
 
             if (response.ok) {
                 console.log('Task updated successfully');
-                setUpdatedTask( response.json())
+                setUpdatedTask(response.json())
                 console.log(updatedTask)
                 setUpdateTask(false)
             } else {
-                console.log('Task was not updated');
+                const errorMessage = await response.text();
+                alert(`Task was not updated: ${errorMessage}`)
+                throw new Error(errorMessage)
             }
         } catch (error) {
             console.error('Error:', error);
@@ -54,12 +56,12 @@ const UpdateTask = () => {
             <div className='w-[60vw] h-[90vh] border rounded-lg bg-gray-500 text-white '>
                 <div className='m-2 p-2' >
                     <label htmlFor="startTime" className='font-semibold text-2xl m-2 p-3'>From:</label>
-                    <input type="date" name="startTime" id="startTime" onChange={handleChange} value={updatedTask.startTime} className='text-black border-2 p-2 border-black rounded-lg' /><br />
+                    <input type="datetime-local" name="startTime" id="startTime" onChange={handleChange} value={updatedTask.startTime} className='text-black border-2 p-2 border-black rounded-lg' /><br />
                 </div>
 
                 <div className='m-2 p-2' >
                     <label htmlFor="endTime" className='font-semibold text-2xl m-2 p-3'>To:</label>
-                    <input type="date" name="endTime" id="endTime" onChange={handleChange} value={updatedTask.endTime} className='text-black border-2 p-2 border-black rounded-lg' /><br />
+                    <input type="datetime-local" name="endTime" id="endTime" onChange={handleChange} value={updatedTask.endTime} className='text-black border-2 p-2 border-black rounded-lg' /><br />
                 </div>
 
                 <div className='m-2 p-2' >

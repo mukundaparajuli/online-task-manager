@@ -4,6 +4,7 @@ import UpdateTask from "./UpdateTask"
 import { useNavigate, useParams } from 'react-router-dom'
 import MyContext from './MyContext'
 import { useAuth } from "../store/auth"
+import moment from 'moment'
 
 
 const TaskDetails = () => {
@@ -97,8 +98,8 @@ const TaskDetails = () => {
                             <div className='font-bold text-5xl m-3 p-3'>{task.taskName}</div>
                             <div className='font-semibold text-xl text-justify m-3 p-3'>{task.taskDescription}</div>
                             <div className='font-semibold italic text-lg mt-3 mx-3 p-3'>
-                                <div >Starts from: {task.startTime}</div>
-                                <div >Ends at: {task.endTime}</div>
+                                <div >Starts from: {moment(task.startTime).format('MMMM Do YYYY, h:mm:ss a')}</div>
+                                <div >Ends at: {moment(task.endTime).format('MMMM Do YYYY, h:mm:ss a')}</div>
                             </div>
                         </div>
                         <div className='m-6 p-3 w-[50%] flex flex-col items-center'>

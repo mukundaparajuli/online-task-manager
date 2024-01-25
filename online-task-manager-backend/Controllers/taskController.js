@@ -8,9 +8,11 @@ const addTasks = expressAsyncHandler(async (req, res) => {
   console.log("The tasks here are", req.body);
   const { taskName, taskDescription, startTime, endTime } = req.body;
   if (!taskName || !startTime || !endTime) {
-    res.status(400).send("Task name, starting time and ending time are mandatory");
+    res.status(400)
+    throw new Error("Task name, starting time and ending time are mandatory");
     return;
   }
+
   const task = await Tasks.create({
     user_id: req.user.id,
     taskName,
@@ -53,7 +55,13 @@ const getTask = expressAsyncHandler(async (req, res) => {
 const putTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.task_id);
   if (!task) {
-    res.status(404).send("Tasks not found");
+    res.status(404)
+    throw new Error("Tasks not found");
+    return;
+  }
+  const { taskName, taskDescription, startTime, endTime } = req.body;
+  if (!taskName || !startTime || !endTime) {
+    res.status(400).send("Task name, starting time and ending time are mandatory");
     return;
   }
   const updatedTask = await Tasks.findByIdAndUpdate(req.params.task_id, req.body, {

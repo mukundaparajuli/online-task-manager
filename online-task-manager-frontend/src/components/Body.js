@@ -12,7 +12,6 @@ const Body = () => {
     const handleTaskAdded = (newTask) => {
         setTasks([...tasks, newTask]);
     };
-    // Assuming addTask and setAddTask are state variables
     const { userAuthentication } = useAuth();
     const [addTask, setAddTask] = useState(false);
     const [updateTask, setUpdateTask] = useState(false);

@@ -5,6 +5,7 @@ import { useAuth } from '../store/auth';
 const Login = () => {
     const navigate = useNavigate();
     const { storeTokenLocally } = useAuth();
+    const [error, setError] = useState(null)
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -31,7 +32,6 @@ const Login = () => {
                 },
                 body: JSON.stringify(user)
             })
-            // console.log(response.json())
             if (response.ok) {
                 const responseData = await response.json();
                 console.log(responseData)
@@ -40,14 +40,17 @@ const Login = () => {
                 storeTokenLocally(responseData.accessToken)
                 navigate(`/users/tasks/`)
             } else {
-                console.log("error inside response ");
+                const errorData = await response.json();
+                const errorMessage = errorData.message || "Unknown error";
+                setError(errorMessage);
+                console.log("Error inside response: ", errorMessage);
             }
         } catch (error) {
             console.error("Error", error);
         }
     }
     return (
-         <div className='flex justify-center items-center h-[100vh] w-full'>
+        <div className='flex justify-center items-center h-[100vh] w-full'>
             <img className="bg-cover object-cover h-screen md:w-[100%] absolute" src={signUpBg} alt='BGImage' />
             <div className="absolute inset-0 bg-black bg-opacity-30"></div>
             <div className='absolute bg-black bg-opacity-60 flex justify-center h-[50vh] w-96 m-8 p-8 rounded-xl shadow-xl'>
@@ -76,6 +79,7 @@ const Login = () => {
                         />
                         <button className='bg-blue-800 text-white p-2 m-1 font-semibold text-xl border border-black rounded-md w-full' onClick={handleLogin}>Login</button>
                     </form>
+                     <div className='font-md text-red-600'>{error}</div>
                     <div className='text-lg  text-white m-1 p-1'>New here? <button className='text-red-800 font-bold' onClick={() => navigate("/")}>Register</button></div>
                 </div>
             </div>

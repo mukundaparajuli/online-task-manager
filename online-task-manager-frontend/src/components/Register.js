@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import signUpBg from "../Utils/BG_Image.webp"
 const Register = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -24,7 +24,6 @@ const Register = () => {
   // handle registration
   const handleRegister = async (e) => {
     e.preventDefault()
-    console.log(user);
     try {
       const response = await fetch('http://localhost:5000/register', {
         method: "post",
@@ -35,23 +34,18 @@ const Register = () => {
       })
       console.log(response)
       if (response.ok) {
-        const responseData = await response.json();
         alert("registration successful");
-        setUser({ name: "", email: "", password: "" });
         navigate("/login")
-        console.log(responseData);
+        // console.log(responseData);
       } else {
-        try {
-          const errorData = await response.json();
-          setError(errorData.error);
-        } catch (error) {
-          setError('Non-JSON error response from the server');
-        }
+        const errorMessage =await response.json();
+        setError(errorMessage.message);
+        alert(`${errorMessage.message}`)
         throw new Error('Something went wrong!');
 
       }
     } catch (error) {
-      setError(error)
+      console.log(error)
     }
   }
 
