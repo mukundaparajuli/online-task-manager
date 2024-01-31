@@ -38,7 +38,7 @@ const Login = () => {
                 alert("logged in successfully");
                 setUser({ email: "", phone: "", password: "" });
                 storeTokenLocally(responseData.accessToken)
-                navigate(`/users/tasks/`)
+                navigate(`/`)
             } else {
                 const errorData = await response.json();
                 const errorMessage = errorData.message || "Unknown error";
@@ -80,7 +80,7 @@ const Login = () => {
                         <button className='bg-blue-800 text-white p-2 m-1 font-semibold text-xl border border-black rounded-md w-full' onClick={handleLogin}>Login</button>
                     </form>
                      <div className='font-md text-red-600'>{error}</div>
-                    <div className='text-lg  text-white m-1 p-1'>New here? <button className='text-red-800 font-bold' onClick={() => navigate("/")}>Register</button></div>
+                    <div className='text-lg  text-white m-1 p-1'>New here? <button className='text-red-800 font-bold' onClick={() => navigate("/register")}>Register</button></div>
                 </div>
             </div>
         </div>

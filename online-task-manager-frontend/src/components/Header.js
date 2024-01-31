@@ -26,7 +26,7 @@ const Header = () => {
       </div>
 
       {showInfo && (
-        <div className="fixed right-2 w-72 bg-white border-4 rounded-2xl p-3 -mt-4">
+        <div className="fixed right-2 w-80 bg-white border-4 rounded-2xl p-3 z-10 -mt-4">
           <div className="flex justify-end mb-4">
           </div>
           <div>
@@ -34,7 +34,7 @@ const Header = () => {
               <h1 className='font-semibold text-2xl'>{user.name}</h1>
               <h1 className='text-lg'>{user.email}</h1>
             </div>
-            <button className='mt-6 font-bold text-blue-700 border-1 p-2 rounded-xl' onClick={handleLogout}>Log Out</button>
+            <button className='mt-6 font-bold border-1 p-2 rounded-xl bg-blue-700 w-72 text-white border-black ' onClick={handleLogout}>Log Out</button>
           </div>
         </div>
       )}

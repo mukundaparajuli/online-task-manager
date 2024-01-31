@@ -25,25 +25,22 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:5000/register', {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-      })
-      console.log(response)
-      if (response.ok) {
-        alert("registration successful");
-        navigate("/login")
-        // console.log(responseData);
-      } else {
-        const errorMessage =await response.json();
-        setError(errorMessage.message);
-        alert(`${errorMessage.message}`)
-        throw new Error('Something went wrong!');
-
-      }
+    const response = await fetch('http://localhost:5000/register', {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+    console.log(response)
+    if (response.ok) {
+      alert("registration successful");
+      navigate("/login")
+      // console.log(responseData);
+    } else if (!response.ok) {
+      const errorMessage = await response.json();
+      setError(errorMessage.message);
+    }
     } catch (error) {
       console.log(error)
     }

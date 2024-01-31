@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const User = require("../Models/userModel")
+const User = require("../Models/userModel");
 
 const nodeMailer = async (req, res, next) => {
     let testAccount = await nodemailer.createTestAccount();
@@ -11,30 +11,35 @@ const nodeMailer = async (req, res, next) => {
             pass: 'j2tCzBukhCBE1fuTpz'
         }
     });
-    const { name, email } = req.body;
-    const user = await User.find({ email: email })
-    if (user) {
-        res.send("User Already exists");
-    }
-    else {
 
-        const message = {
-            from: '"Fred Foo 👻" <foo@example.com>', // sender address
-            to: email, // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
+    try {
+        const { name, email, password } = req.body;
+        if (!name || !email || !password) {
+            res.status(400)
+            throw new Error("All fields are mandatory to be filled!");
         }
-        try {
-            const info = await transporter.sendMail(message)
+        const userAvailable = await User.findOne({ email });
+        if (userAvailable) {
+            res.status(400)
+            throw new Error("User already exists!");
+        } else {
+            // User doesn't exist, send email
+            const message = {
+                from: '"Fred Foo 👻" <foo@example.com>', // sender address
+                to: email, // list of receivers
+                subject: "Hello ✔", // Subject line
+                text: "Hello world?", // plain text body
+                html: "<b>Hello world?</b>", // html body
+            };
+
+            const info = await transporter.sendMail(message);
             console.log(info);
-            res.status(200)
-            res.json(info)
-        } catch (error) {
-            console.log(error);
+            res.status(200).json(info);
         }
+    } catch (error) {
+        console.log(error);
     }
     next();
-}
+};
 
 module.exports = nodeMailer;

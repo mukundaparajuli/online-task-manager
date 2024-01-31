@@ -9,14 +9,14 @@ const validateTokenHandler = expressAsyncHandler(async (req, res, next) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
             if (err) {
                 res.status(401);
-                throw new Error("Credentials are invalid!");
+                throw new Error("Unauthorized!");
             }
             req.user = decoded.user;
             next();
         });
     } else {
         res.status(401);
-        throw new Error("Credentials are invalid");
+        throw new Error("Unauthorized!");
     }
 });
 

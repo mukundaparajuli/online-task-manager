@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import MyContext from './MyContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const UpdateTask = () => {
-    const navigate = useNavigate();
-    const { UpdateTask, setUpdateTask } = useContext(MyContext);
+    const { setUpdateTask } = useContext(MyContext);
     const token = localStorage.getItem('token')
     const { task_id } = useParams();
     const [updatedTask, setUpdatedTask] = useState({
@@ -33,18 +32,14 @@ const UpdateTask = () => {
                 },
                 body: JSON.stringify(updatedTask)
             });
-
-            console.log('Response:', response);
-
             if (response.ok) {
                 console.log('Task updated successfully');
                 setUpdatedTask(response.json())
                 console.log(updatedTask)
-                setUpdateTask(false)
+                setUpdateTask(false);
             } else {
                 const errorMessage = await response.text();
                 alert(`Task was not updated: ${errorMessage}`)
-                throw new Error(errorMessage)
             }
         } catch (error) {
             console.error('Error:', error);
@@ -53,7 +48,7 @@ const UpdateTask = () => {
 
     return (
         <div className='flex justify-center items-center h-[100vh]'>
-            <div className='w-[60vw] h-[90vh] border rounded-lg bg-gray-500 text-white '>
+            <div className='w-[60vw] h-[90vh] border rounded-lg bg-gray-400 text-white '>
                 <div className='m-2 p-2' >
                     <label htmlFor="startTime" className='font-semibold text-2xl m-2 p-3'>From:</label>
                     <input type="datetime-local" name="startTime" id="startTime" onChange={handleChange} value={updatedTask.startTime} className='text-black border-2 p-2 border-black rounded-lg' /><br />
