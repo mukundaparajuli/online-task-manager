@@ -48,7 +48,7 @@ const UpdateTask = () => {
 
     return (
         <div className='flex justify-center items-center h-[100vh]'>
-            <div className='w-[60vw] h-[90vh] border rounded-lg bg-gray-400 text-white '>
+            <div className='w-[60vw] h-auto border rounded-lg bg-gray-400 text-white '>
                 <div className='m-2 p-2' >
                     <label htmlFor="startTime" className='font-semibold text-2xl m-2 p-3'>From:</label>
                     <input type="datetime-local" name="startTime" id="startTime" onChange={handleChange} value={updatedTask.startTime} className='text-black border-2 p-2 border-black rounded-lg' /><br />

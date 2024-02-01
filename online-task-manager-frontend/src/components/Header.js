@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className="relative">
       <div className="flex justify-between items-center p-3 shadow-xl">
-        <Link to={"/"}><div ><img src={logo} alt="" className='h-12' /></div></Link>
+        <Link to={"/users/tasks/"}><div ><img src={logo} alt="" className='h-12' /></div></Link>
         <div>
           <button onClick={handleShowInfo}>
             <img src={accountIcon} alt="Account" className="h-12 border-2 border-black rounded-full" />

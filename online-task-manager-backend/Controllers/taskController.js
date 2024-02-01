@@ -1,9 +1,9 @@
 const expressAsyncHandler = require("express-async-handler");
 const Tasks = require("../Models/taskModel");
 
-//@Desc post all tasks
-//@routes POST /tasks/:id
-//access public
+//@Desc post tasks
+//@routes POST /tasks/
+//access private
 const addTasks = expressAsyncHandler(async (req, res) => {
   console.log("The tasks here are", req.body);
   const { taskName, taskDescription, startTime, endTime } = req.body;
@@ -24,7 +24,7 @@ const addTasks = expressAsyncHandler(async (req, res) => {
 });
 
 //@Desc get all tasks
-//@routes GET /tasks/:id
+//@routes GET /tasks/:userid
 //access private
 const getTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.find({ user_id: req.user.id });
@@ -36,8 +36,8 @@ const getTasks = expressAsyncHandler(async (req, res) => {
 });
 
 
-//@Desc get all tasks
-//@routes GET /tasks/:userid/:taskid
+//@Desc get a task
+//@routes GET /tasks/details/:task_id
 //access private
 const getTask = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.task_id);
@@ -50,7 +50,7 @@ const getTask = expressAsyncHandler(async (req, res) => {
 });
 
 //@Desc put all tasks
-//@routes PUT /tasks/:id
+//@routes PUT /tasks/:task_id
 //access private
 const putTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.task_id);
@@ -71,7 +71,7 @@ const putTasks = expressAsyncHandler(async (req, res) => {
 });
 
 //@Desc get all tasks
-//@routes DELETE /tasks/: userid/:id
+//@routes DELETE /tasks/:task_id
 //access private
 const deleteTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.task_id);

@@ -9,8 +9,8 @@ const AddTask = () => {
         endTime: "",
     })
 
-    const { userAuthentication, serverToken } = useAuth();
-    const { addTask, setAddTask } = useContext(MyContext);
+    const { userAuthentication } = useAuth();
+    const { setAddTask } = useContext(MyContext);
     const token = localStorage.getItem("token")
     const handleInput = (e) => {
         console.log(e)
@@ -34,8 +34,6 @@ const AddTask = () => {
                 },
                 body: JSON.stringify(task)
             })
-            // const jsonform=await response.json();
-            // console.log(jsonform)
             if (response.ok) {
                 const responseData = await response.json();
                 console.log(responseData)
@@ -43,7 +41,6 @@ const AddTask = () => {
                 setAddTask(false)
             } else {
                 const errorData = await response.json();
-
                 const errorMessage = errorData.message || "Unknown error";
                 console.log(errorMessage)
                 alert(errorMessage);
@@ -62,8 +59,8 @@ const AddTask = () => {
     return (
 
         <div className='flex justify-center items-center h-[100vh]'>
-            <div className='w-[60vw] h-[90vh] border rounded-lg bg-gray-400 text-white '>
-                <form  onSubmit={()=>handleAddTask(token)}>
+            <div className='w-[60vw] h-auto border rounded-lg bg-gray-400 text-white '>
+                <form onSubmit={() => handleAddTask(token)}>
                     <div className='m-2 p-2' >
                         <label htmlFor="startTime" className='font-semibold text-2xl m-2 p-3'>From:</label>
                         <input type="datetime-local" name="startTime" id="startTime" value={task.startTime} className='border-2 p-2 text-black border-black rounded-lg' onChange={handleInput} /><br />

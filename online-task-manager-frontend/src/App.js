@@ -6,9 +6,9 @@ import AddTask from "./components/AddTask";
 import TaskDetails from "./components/TaskDetails";
 function App() {
   const approuter = createBrowserRouter([
-    { path: "/", element: <Body /> },
+    { path: "/users/tasks", element: <Body /> },
     { path: "/users/tasks/details/:task_id", element: <TaskDetails /> },
-    { path: "/register", element: <Register /> },
+    { path: "/", element: <Register /> },
     { path: "/login", element: <Login /> },
     { path: "/users/addtask", element: <AddTask /> },
     { path: "/users/details", element: <TaskDetails /> }
