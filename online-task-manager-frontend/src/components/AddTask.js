@@ -44,7 +44,6 @@ const AddTask = () => {
                 const errorMessage = errorData.message || "Unknown error";
                 console.log(errorMessage)
                 alert(errorMessage);
-                console.log("Error inside response: ", errorMessage);
             }
         } catch (error) {
             console.error("Error", error);

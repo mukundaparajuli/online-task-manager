@@ -38,8 +38,11 @@ const UpdateTask = () => {
                 console.log(updatedTask)
                 setUpdateTask(false);
             } else {
-                const errorMessage = await response.text();
-                alert(`Task was not updated: ${errorMessage}`)
+                const errorData = await response.json();
+                const errorMessage = errorData.message || "Unknown error";
+                console.log(errorMessage)
+                alert(errorMessage);
+                console.log("Error inside response: ", errorMessage);
             }
         } catch (error) {
             console.error('Error:', error);

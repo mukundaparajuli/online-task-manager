@@ -12,15 +12,20 @@ const addTasks = expressAsyncHandler(async (req, res) => {
     throw new Error("Task name, starting time and ending time are mandatory");
     return;
   }
-
-  const task = await Tasks.create({
-    user_id: req.user.id,
-    taskName,
-    taskDescription,
-    startTime,
-    endTime,
-  });
-  res.json(task);
+  try {
+    const task = await Tasks.create({
+      user_id: req.user.id,
+      taskName,
+      taskDescription,
+      startTime,
+      endTime,
+    });
+    res.json(task);
+  } catch (error) {
+    res.status(400);
+    throw new Error("Validation Failed!");
+    return;
+  }
 });
 
 //@Desc get all tasks
@@ -49,26 +54,41 @@ const getTask = expressAsyncHandler(async (req, res) => {
   res.json(task);
 });
 
-//@Desc put all tasks
+//@Desc put task
 //@routes PUT /tasks/:task_id
 //access private
 const putTasks = expressAsyncHandler(async (req, res) => {
   const task = await Tasks.findById(req.params.task_id);
   if (!task) {
-    res.status(404)
-    throw new Error("Tasks not found");
+    res.status(404).send("Task not found");
     return;
   }
+
   const { taskName, taskDescription, startTime, endTime } = req.body;
   if (!taskName || !startTime || !endTime) {
-    res.status(400).send("Task name, starting time and ending time are mandatory");
+    res.status(400).send("Task name, starting time, and ending time are mandatory");
     return;
   }
-  const updatedTask = await Tasks.findByIdAndUpdate(req.params.task_id, req.body, {
-    new: true,
-  });
+
+  // Update the task fields
+  task.taskName = taskName;
+  task.taskDescription = taskDescription;
+  task.startTime = startTime;
+  task.endTime = endTime;
+
+  // Manually validate the updated task
+  try {
+    await task.validate();
+  } catch (error) {
+    res.status(400)
+    throw new Error("validation failed!")
+    return;
+  }
+  const updatedTask = await task.save();
+
   res.status(200).json(updatedTask);
 });
+
 
 //@Desc get all tasks
 //@routes DELETE /tasks/:task_id
