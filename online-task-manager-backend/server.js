@@ -11,7 +11,6 @@ app.use(cors())
 app.use(express.json());
 app.use("/users/", require("./Routes/taskRouter"));
 app.use("/", require("./Routes/userRouter"));
-// app.use("/", require("./RoutesprofileRouter"));
 app.use(errorHandler);
 app.listen(port, () => {
   console.log(`connected to the port ${port}`);

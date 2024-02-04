@@ -58,7 +58,7 @@ const AddTask = () => {
     return (
 
         <div className='flex justify-center items-center h-[100vh]'>
-            <div className='w-[60vw] h-auto border rounded-lg bg-gray-400 text-white '>
+            <div className='w-[40vw] h-auto border rounded-lg bg-blue-200'>
                 <form onSubmit={() => handleAddTask(token)}>
                     <div className='m-2 p-2' >
                         <label htmlFor="startTime" className='font-semibold text-2xl m-2 p-3'>From:</label>
@@ -77,12 +77,12 @@ const AddTask = () => {
 
                     <div className='m-2 p-2' >
                         <label htmlFor="taskDescription" className='font-semibold text-2xl m-2 p-3'>Task Description:</label><br />
-                        <textarea name="taskDescription" id="taskDescription" value={task.taskDescription} cols="30" rows="10" className='text-black border-2 border-black m-2 p-4 w-3/5 rounded-xl justify-center text-md font-semibold' onChange={handleInput}></textarea><br />
+                        <textarea name="taskDescription" id="taskDescription" value={task.taskDescription} cols="30" rows="5" className='text-black border-2 border-black m-2 p-4 w-3/5 rounded-xl justify-center text-md font-semibold' onChange={handleInput}></textarea><br />
                     </div>
 
                     <div className='p-3'>
-                        <button className='m-2 p-2 bg-green-600 rounded-lg shadow-green-500 text-lg font-bold text-white' type='submit'>Add+</button>
-                        <button className='m-2 p-2 bg-red-600 rounded-lg shadow-red-500 text-lg font-bold text-white' onClick={() => setAddTask(false)}>Cancel</button>
+                        <button className='w-[20%] m-2 p-2 bg-green-600 rounded-lg shadow-green-500 text-lg font-bold text-white' type='submit'>Add+</button>
+                        <button className='w-[20%] m-2 p-2 bg-red-600 rounded-lg shadow-red-500 text-lg font-bold text-white' onClick={() => setAddTask(false)}>Cancel</button>
                     </div>
 
                 </form>

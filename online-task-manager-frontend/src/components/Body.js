@@ -64,13 +64,8 @@ const Body = () => {
         <MyContext.Provider value={{ addTask, setAddTask, updateTask, setUpdateTask }}>
             <div className=''>
                 {addTask &&
-                    <div className='absolute z-10 flex justify-center w-full shadow-2xl shadow-gray-500 bg-opacity-5'>
-                        <AddTask />
-                    </div>
-                }
-                {updateTask &&
-                    <div className='absolute z-10 flex justify-center w-full'>
-                        <UpdateTask />
+                    <div className='absolute z-30 flex justify-center w-full shadow-2x'>
+                    <AddTask />
                     </div>
                 }
                 <Header />
