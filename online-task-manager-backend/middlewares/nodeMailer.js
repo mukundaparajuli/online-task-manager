@@ -28,11 +28,9 @@ const nodeMailer = async (req, res, next) => {
                 from: '"Fred Foo 👻" <foo@example.com>', // sender address
                 to: email, // list of receivers
                 subject: "Hello ✔", // Subject line
-                text: "Hello world?", // plain text body
+                text: "Your account has been registered now!", // plain text body
                 html: "<b>Hello world?</b>", // html body
-            };
-
-            const info = await transporter.sendMail(message);
+            };const info = await transporter.sendMail(message);
             console.log(info);
             res.status(200).json(info);
         }
